@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Download Completed</h1>
+<ul>
+    {% for file in downloaded_files %}
+        {% if file.url %}
+            <li><a href="{{ file.url }}" download>{{ file.name }}</a></li>
+        {% else %}
+            <li>{{ file.name }}</li>
+        {% endif %}
+    {% endfor %}
+</ul>
+<a href="{% url 'download' %}">Download another</a>
+{% endblock %}
