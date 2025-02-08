@@ -30,7 +30,16 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-rk4bv=j6inilqimvs=+9okl4yj%^m_m48%73+8&(m%m&wq1gie'
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env
+load_dotenv()
+
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+
+if not SECRET_KEY:
+    raise ValueError("SECRET_KEY is not set in the environment variables!")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

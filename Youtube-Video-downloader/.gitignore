@@ -1,5 +1,22 @@
-"db.sqlite3" 
-"__pycache__/" 
-"celerybeat-schedule" 
-tr API_KEY SECRET PASSWORD TOKEN
+# Ignore database file
+db.sqlite3
 
+# Ignore Python cache
+__pycache__/
+venv/
+
+# Ignore Celery schedule file
+celerybeat-schedule
+
+# Ignore environment variables
+.env
+
+# Ignore any files containing API keys, secrets, or tokens (optional)
+*.key
+*.pem
+*.cert
+*.pyc
+*.pyo
+config.json
+
+tr API_KEY SECRET PASSWORD TOKEN
