@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Download in Progress</h1>
+<p>Your task (ID: {{ task_id }}) is currently being processed.</p>
+<div id="status-message">Checking status...</div>
+<script>
+    function pollTaskStatus() {
+        fetch("{% url 'task_status_json' task_id %}")
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("status-message").innerText = "Current state: " + data.state;
+                if (data.state === "SUCCESS" || data.state === "FAILURE") {
+                    window.location.href = "{% url 'download_status' task_id %}";
+                } else {
+                    setTimeout(pollTaskStatus, 3000);
+                }
+            })
+            .catch(error => {
+                console.error("Error polling task status:", error);
+                setTimeout(pollTaskStatus, 5000);
+            });
+    }
+    pollTaskStatus();
+</script>
+{% endblock %}
